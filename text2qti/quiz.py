@@ -474,7 +474,7 @@ class Group(object):
         self.pick = 1
         self._pick_is_set = False
         self.solutions_pick: Optional[int] = None
-        self.points_per_question = 1
+        self.points_per_question = 1.0
         self._points_per_question_is_set = False
         self.questions: List[Question] = []
         self._question_points_possible: Optional[Union[int, float]] = None
@@ -516,10 +516,10 @@ class Group(object):
         if self._points_per_question_is_set:
             Text2qtiError('"Points per question" has already been set for this question group')
         try:
-            self.points_per_question = int(text)
+            self.points_per_question = float(text)
         except Exception as e:
             raise Text2qtiError(f'"Points per question" value is invalid (must be positive number):\n{e}')
-        if self.points_per_question <= 0:
+        if self.points_per_question <= 0.0:
             raise Text2qtiError(f'"Points per question" value is invalid (must be positive number):')
         self._points_per_question_is_set = True
 
